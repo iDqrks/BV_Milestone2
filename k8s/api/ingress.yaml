@@ -8,6 +8,10 @@ metadata:
     cert-manager.io/cluster-issuer: "selfsigned-issuer"
 spec:
   ingressClassName: nginx
+  tls:
+  - hosts:
+    - api.milestone.local
+    secretName: api-tls-secret
   rules:
   - host: api.milestone.local
     http:
@@ -19,7 +23,3 @@ spec:
             name: api-service
             port:
               number: 8000
-  tls:
-  - hosts:
-    - api.milestone.local
-    secretName: api-tls-secret

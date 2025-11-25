@@ -9,17 +9,14 @@ metadata:
     cert-manager.io/cluster-issuer: "selfsigned-issuer"
 spec:
   ingressClassName: nginx
+  tls:
+  - hosts:
+    - milestone.local
+    secretName: frontend-tls-secret
   rules:
   - host: milestone.local
     http:
       paths:
-      - path: /api
-        pathType: Prefix
-        backend:
-          service:
-            name: api-service
-            port:
-              number: 8000
       - path: /
         pathType: Prefix
         backend:
@@ -27,7 +24,10 @@ spec:
             name: frontend-service
             port:
               number: 80
-  tls:
-  - hosts:
-    - milestone.local
-    secretName: frontend-tls-secret
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 8000
