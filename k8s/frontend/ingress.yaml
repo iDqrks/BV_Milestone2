@@ -12,9 +12,27 @@ spec:
   tls:
   - hosts:
     - milestone.local
+    - localhost
     secretName: frontend-tls-secret
   rules:
   - host: milestone.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend-service
+            port:
+              number: 80
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 8000
+  - host: localhost
     http:
       paths:
       - path: /
