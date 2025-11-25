@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Milestone 2 - Brent Verlinden</title>
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        min-height: 100vh;
+      }
+      .container {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 30px;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        text-align: center;
+      }
+      h1 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+      }
+      .info-box {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 15px;
+        border-radius: 10px;
+        margin: 20px 0;
+      }
+      .container-id {
+        font-family: monospace;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 10px;
+        border-radius: 5px;
+        display: inline-block;
+      }
+      .tech-stack {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .tech-badge {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 0.8em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1><span id="user">Loading...</span> has reached milestone 2!</h1>
+      <div class="info-box">
+        <p><strong>Container ID:</strong> <span class="container-id" id="containerId">Loading...</span></p>
+        <p><strong>Served by:</strong> Lighttpd Web Server</p>
+      </div>
+      <div class="info-box">
+        <p>This application is running on Kubernetes with MariaDB, Lighttpd, and automatic scaling!</p>
+      </div>
+      <div class="tech-stack">
+        <div class="tech-badge">Kubernetes</div>
+        <div class="tech-badge">MariaDB</div>
+        <div class="tech-badge">Lighttpd</div>
+        <div class="tech-badge">FastAPI</div>
+        <div class="tech-badge">Docker</div>
+      </div>
+    </div>
+
+<script>
+  async function updateUserInfo() {
+    try {
+      // Gebruik relative URLs - de browser zal deze naar localhost:8080 sturen
+      const userResponse = await fetch('/api/user');
+      const userData = await userResponse.json();
+      
+      const containerResponse = await fetch('/api/container');
+      const containerData = await containerResponse.json();
+      
+      document.getElementById('user').innerText = userData.name;
+      document.getElementById('containerId').innerText = containerData.container_id;
+    } catch (error) {
+      console.error('Error:', error);
+      document.getElementById('user').innerText = 'Brent Verlinden';
+      document.getElementById('containerId').innerText = 'Unknown (Fallback)';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', updateUserInfo);
+  setInterval(updateUserInfo, 10000);
+</script>
+  </body>
+</html>
