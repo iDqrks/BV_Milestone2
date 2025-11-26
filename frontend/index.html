@@ -69,24 +69,6 @@
         <div class="tech-badge">Lighttpd</div>
         <div class="tech-badge">FastAPI</div>
         <div class="tech-badge">Docker</div>
-      </div>
-    </div>
-
-<script>
-  async function updateUserInfo() {
-    try {
-      // Gebruik relative URLs - de browser zal deze naar localhost:8080 sturen
-      const userResponse = await fetch('/api/user');
-      const userData = await userResponse.json();
-      
-      const containerResponse = await fetch('/api/container');
-      const containerData = await containerResponse.json();
-      
-      document.getElementById('user').innerText = userData.name;
-      document.getElementById('containerId').innerText = containerData.container_id;
-    } catch (error) {
-      console.error('Error:', error);
-      document.getElementById('user').innerText = 'Brent Verlinden';
       document.getElementById('containerId').innerText = 'Unknown (Fallback)';
     }
   }
