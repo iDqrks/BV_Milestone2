@@ -1,4 +1,4 @@
 fastapi
 uvicorn
 pymysql
-prometheus-fastapi-instrumentator
+pydantic

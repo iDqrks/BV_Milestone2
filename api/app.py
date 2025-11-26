@@ -1,6 +1,5 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from prometheus_fastapi_instrumentator import Instrumentator
 import pymysql
 import os
 import socket
@@ -95,9 +94,12 @@ async def health_check():
         print(f"Health check error: {e}")
         raise HTTPException(status_code=500, detail=f"Database connection failed: {str(e)}")
 
-# Initialize Prometheus instrumentation
-# This automatically creates a /metrics endpoint with proper Prometheus format
-Instrumentator().instrument(app).expose(app)
+@app.get("/metrics")
+async def metrics():
+    return {
+        "http_requests_total": 1,
+        "container_id": socket.gethostname()
+    }
 
 if __name__ == "__main__":
     import uvicorn

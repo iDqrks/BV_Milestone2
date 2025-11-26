@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: idqrks/milestone-api:v3
+        image: idqrks/milestone-api:v2
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
