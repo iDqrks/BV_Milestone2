@@ -29,7 +29,7 @@ server.error-handler-404 = "/index.html"
 # Proxy configuration for API
 $HTTP["url"] =~ "^/api/" {
     proxy.server = ( "" =>
-      (( "host" => "api-service.milestone-app.svc.cluster.local", "port" => 8000 ))
+      (( "host" => "bv-api-service.bv-app.svc.cluster.local", "port" => 8000 ))
     )
     proxy.header = ( "map-urlpath" => ( "/api" => "" ) )
 }

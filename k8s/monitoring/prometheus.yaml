@@ -99,7 +99,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: bv-bv-prometheus-service
+  name: bv-prometheus-service
   namespace: bv-app
 spec:
   selector:
