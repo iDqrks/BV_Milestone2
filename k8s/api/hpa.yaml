@@ -1,13 +1,13 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: api-hpa
-  namespace: milestone-app
+  name: bv-api-hpa
+  namespace: bv-app
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: api-deployment
+    name: bv-api
   minReplicas: 2
   maxReplicas: 5
   metrics:

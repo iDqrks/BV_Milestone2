@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mariadb
-  namespace: milestone-app
+  name: bv-mariadb
+  namespace: bv-app
 spec:
   replicas: 1
   revisionHistoryLimit: 1
@@ -15,7 +15,7 @@ spec:
         app: mariadb
     spec:
       containers:
-      - name: mariadb
+      - name: bv-mariadb
         image: mariadb:10.11
         env:
         - name: MYSQL_ROOT_PASSWORD
@@ -63,4 +63,4 @@ spec:
       volumes:
       - name: init-script
         configMap:
-          name: db-init
+          name: bv-db-init

@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: frontend-ingress
-  namespace: milestone-app
+  namespace: bv-app
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
@@ -23,14 +23,14 @@ spec:
         pathType: ImplementationSpecific
         backend:
           service:
-            name: frontend-service
+            name: bv-frontend-service
             port:
               number: 80
       - path: /api(/|$)(.*)
         pathType: ImplementationSpecific
         backend:
           service:
-            name: api-service
+            name: bv-api-service
             port:
               number: 8000
   - host: localhost
@@ -40,13 +40,13 @@ spec:
         pathType: ImplementationSpecific
         backend:
           service:
-            name: frontend-service
+            name: bv-frontend-service
             port:
               number: 80
       - path: /api(/|$)(.*)
         pathType: ImplementationSpecific
         backend:
           service:
-            name: api-service
+            name: bv-api-service
             port:
               number: 8000

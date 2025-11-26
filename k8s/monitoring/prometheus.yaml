@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: prometheus-config
-  namespace: milestone-app
+  name: bv-prometheus-config
+  namespace: bv-app
 data:
   prometheus.yml: |
     global:
@@ -50,8 +50,8 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: prometheus
-  namespace: milestone-app
+  name: bv-prometheus
+  namespace: bv-app
 spec:
   replicas: 1
   revisionHistoryLimit: 1
@@ -63,9 +63,9 @@ spec:
       labels:
         app: prometheus
     spec:
-      serviceAccountName: prometheus
+      serviceAccountName: bv-prometheus
       containers:
-      - name: prometheus
+      - name: bv-prometheus
         image: prom/prometheus:latest
         args:
         - '--config.file=/etc/prometheus/prometheus.yml'
@@ -77,9 +77,9 @@ spec:
         ports:
         - containerPort: 9090
         volumeMounts:
-        - name: prometheus-config-volume
+        - name: bv-prometheus-config-volume
           mountPath: /etc/prometheus/
-        - name: prometheus-storage-volume
+        - name: bv-prometheus-storage-volume
           mountPath: /prometheus/
         resources:
           requests:
@@ -89,18 +89,18 @@ spec:
             memory: "512Mi"
             cpu: "500m"
       volumes:
-      - name: prometheus-config-volume
+      - name: bv-prometheus-config-volume
         configMap:
-          name: prometheus-config
-      - name: prometheus-storage-volume
+          name: bv-prometheus-config
+      - name: bv-prometheus-storage-volume
         emptyDir: {}
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: prometheus-service
-  namespace: milestone-app
+  name: bv-bv-prometheus-service
+  namespace: bv-app
 spec:
   selector:
     app: prometheus
@@ -113,14 +113,14 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: prometheus
-  namespace: milestone-app
+  name: bv-prometheus
+  namespace: bv-app
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: prometheus
+  name: bv-prometheus
 rules:
 - apiGroups: [""]
   resources:
@@ -142,12 +142,12 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: prometheus
+  name: bv-prometheus
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: prometheus
+  name: bv-prometheus
 subjects:
 - kind: ServiceAccount
-  name: prometheus
-  namespace: milestone-app
+  name: bv-prometheus
+  namespace: bv-app

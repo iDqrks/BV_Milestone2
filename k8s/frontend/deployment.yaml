@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-deployment
-  namespace: milestone-app
+  name: bv-frontend
+  namespace: bv-app
 spec:
   replicas: 2
   revisionHistoryLimit: 1
@@ -15,8 +15,8 @@ spec:
         app: frontend
     spec:
       containers:
-      - name: frontend
-        image: milestone-frontend:latest
+      - name: bv-frontend
+        image: bv-frontend:latest
         imagePullPolicy: Never
         ports:
         - containerPort: 80

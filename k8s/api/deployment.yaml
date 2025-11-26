@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api-deployment
-  namespace: milestone-app
+  name: bv-api
+  namespace: bv-app
 spec:
   replicas: 2
   revisionHistoryLimit: 1
@@ -15,8 +15,8 @@ spec:
         app: api
     spec:
       containers:
-      - name: api
-        image: idqrks/milestone-api:v2
+      - name: bv-api
+        image: idqrks/bv-api:v2
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
@@ -24,22 +24,22 @@ spec:
         - name: DB_HOST
           valueFrom:
             secretKeyRef:
-              name: db-secret
+              name: bv-db-secret
               key: DB_HOST
         - name: DB_USER
           valueFrom:
             secretKeyRef:
-              name: db-secret
+              name: bv-db-secret
               key: DB_USER
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: db-secret
+              name: bv-db-secret
               key: DB_PASSWORD
         - name: DB_NAME
           valueFrom:
             secretKeyRef:
-              name: db-secret
+              name: bv-db-secret
               key: DB_NAME
         - name: DB_PORT
           value: "3306"

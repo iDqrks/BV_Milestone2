@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mariadb-service
-  namespace: milestone-app
+  name: bv-mariadb-service
+  namespace: bv-app
 spec:
   selector:
     app: mariadb
