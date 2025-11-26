@@ -31,7 +31,7 @@ $HTTP["url"] =~ "^/api/" {
     proxy.server = ( "" =>
       (( "host" => "api-service.milestone-app.svc.cluster.local", "port" => 8000 ))
     )
-    proxy.header = ( "map-urlpath" => ( "/api/" => "/" ) )
+    proxy.header = ( "map-urlpath" => ( "/api" => "" ) )
 }
 EOF
 
